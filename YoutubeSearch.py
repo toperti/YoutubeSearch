@@ -17,7 +17,7 @@ scopes = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 def jprint(obj):
 	print(json.dumps(obj, sort_keys = True, indent = 4))
 
-def getResponse():
+def getResponse(words):
     # Disable OAuthlib's HTTPS verification when running locally.
     # *DO NOT* leave this option enabled in production.
     os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
@@ -36,7 +36,7 @@ def getResponse():
     request = youtube.search().list(
         part="snippet",
         maxResults=25,
-        q="surfing"
+        q=words
     )
 
     response = request.execute()
@@ -45,19 +45,24 @@ def getResponse():
     # jprint(response)
     return response['items']
 
+def getType(item):
+    rawKind = item['id']['kind']
+    endKind = rawKind[8:].capitalize()
+    return endKind
+
 def getChannel(item):
-    return item['channelTitle']
+    return item['snippet']['channelTitle']
 
 def getTitle(item):
-    return item['title']
+    return item['snippet']['title']
 
 def printVideos(itemList):
     for item in itemList:
-        container = item['snippet']
-        print(getChannel(container), "–", getTitle(container))
+        print(getType(item) + ":", getChannel(item), "–", getTitle(item))
 
 def main():
-    results = getResponse()
+    searchPhrase = input("What would you like to search for?: ")
+    results = getResponse(searchPhrase)
     printVideos(results)
 
 if __name__ == "__main__":
