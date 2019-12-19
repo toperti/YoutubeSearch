@@ -5,7 +5,7 @@
 # Sample Python code for youtube.search.list
 # See instructions for running these code samples locally:
 # https://developers.google.com/explorer-help/guides/code_samples#python
-
+import json
 import os
 
 import google_auth_oauthlib.flow
@@ -14,7 +14,10 @@ import googleapiclient.errors
 
 scopes = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 
-def main():
+def jprint(obj):
+	print(json.dumps(obj, sort_keys = True, indent = 4))
+
+def getResponse():
     # Disable OAuthlib's HTTPS verification when running locally.
     # *DO NOT* leave this option enabled in production.
     os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
@@ -35,11 +38,32 @@ def main():
         maxResults=25,
         q="surfing"
     )
+
     response = request.execute()
 
-    print(response)
+    # using jprint rather than normal print for beauty purposes
+    # jprint(response)
+    return response['items']
 
-print("oooga")
+def getChannel(item):
+    return item['channelTitle']
+
+def getTitle(item):
+    return item['title']
+
+def printVideos(itemList):
+    for item in itemList:
+        container = item['snippet']
+        print(getChannel(container), "–", getTitle(container))
+
+def main():
+    results = getResponse()
+    printVideos(results)
 
 if __name__ == "__main__":
     main()
+
+# remaining tasks
+# have to obtain the keywords from the user and then input them where searching is (don't know the format for that yet)
+# have to beautify the output so that it doesn't look like shit
+# maybe use flask/django to put it up on a website
