@@ -56,9 +56,29 @@ def getChannel(item):
 def getTitle(item):
     return item['snippet']['title']
 
+def generateURL(item):
+    # get the video type
+    itemType = getType(item)
+
+    if itemType == "Video":
+        # make URL for video
+        URL = "https://www.youtube.com/watch?v="
+        URL += item['id']['videoId']
+
+    elif itemType == "Channel":
+        # make URL for channel
+        URL = "https://www.youtube.com/channel/"
+        URL += item['id']['channelId']
+
+    else:
+        URL = "I Don't know how to make a URL for " + itemType + " yet"
+
+    return URL
+
 def printVideos(itemList):
     for item in itemList:
         print(getType(item) + ":", getChannel(item), "–", getTitle(item))
+        print(generateURL(item))
 
 def main():
     searchPhrase = input("What would you like to search for?: ")
