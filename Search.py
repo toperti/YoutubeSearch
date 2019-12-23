@@ -6,12 +6,18 @@ import json
 def jprint(obj):
 	print(json.dumps(obj, sort_keys = True, indent = 4))
 
+def getKey():
+	with open('creds.txt') as creds:
+		key = creds.readline()
+		key.rstrip()
+	return key
+
 def getResponse():
 	searchPhrase = input('What would you like to search for?: ')
 	params = {
 		'part' : 'snippet',
 		'q' : searchPhrase,
-		'key' : 'AIzaSyCCoMcagrdyc3bNSw2aZwLDE28Elohct0Q',
+		'key' : getKey(),
 		'maxResults' : 3
 	}
 
