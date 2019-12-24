@@ -11,13 +11,12 @@ def getKey():
 		key.rstrip()
 	return key
 
-def getResponse():
-	searchPhrase = input('What would you like to search for?: ')
+def getResponse(searchPhrase):
 	params = {
 		'part' : 'snippet',
 		'q' : searchPhrase,
 		'key' : getKey(),
-		'maxResults' : 3
+		'maxResults' : 20
 	}
 
 	response = requests.get('https://www.googleapis.com/youtube/v3/search', params = params)
@@ -75,13 +74,13 @@ def genResult(itemList):
 		res.append(getType(item) + ": " + getChannel(item) + " – " + getTitle(item) + '\n')
 		res.append(generateURL(item) + '\n')
 		res.append(getImage(item))
-	print(res)
 	return res
 
 def main():
-	results = getResponse()
+	searchPhrase = input('What would you like to search for?: ')
+	results = getResponse(searchPhrase)
 	response = genResult(results)
-	return response
+	return [searchPhrase] + response
 
 if __name__ == '__main__':
 	print(main())
