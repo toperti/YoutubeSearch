@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+	{% for i in range(0, (results|length)-1, 2) %}
+		<div>
+			<a href = {{ results[i+1] }}>
+				<p> {{ results[i] }} </p>
+			</a>
+		</div>
+	{% endfor %}
+{% endblock %}
