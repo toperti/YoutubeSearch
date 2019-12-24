@@ -1,7 +1,9 @@
-from YoutubeSearch import app
-from YoutubeSearch.Search import main
+from sapp import app
+from flask import render_template
+from sapp.Search import main
 
 @app.route('/')
 @app.route('/index')
 def index():
-	return main()
+	results = main()
+	return render_template('index.html', results = results)

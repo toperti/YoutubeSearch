@@ -67,11 +67,11 @@ def printVideos(itemList):
 		print(generateURL(item))
 
 def genResult(itemList):
-	res = ''
+	res = []
 	for item in itemList:
-		res += getType(item) + ": " + getChannel(item) + " – " + getTitle(item) + '\n'
-		res += generateURL(item) + '\n'
-
+		res.append(getType(item) + ": " + getChannel(item) + " – " + getTitle(item) + '\n')
+		res.append(generateURL(item) + '\n')
+	print(res)
 	return res
 
 def main():
