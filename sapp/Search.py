@@ -31,6 +31,9 @@ def getResponse():
 	# jprint(response)
 	return response['items']
 
+def getImage(item):
+	return item['snippet']['thumbnails']['default']['url']
+
 def getType(item):
 	rawKind = item['id']['kind']
 	endKind = rawKind[8:].capitalize()
@@ -71,6 +74,7 @@ def genResult(itemList):
 	for item in itemList:
 		res.append(getType(item) + ": " + getChannel(item) + " – " + getTitle(item) + '\n')
 		res.append(generateURL(item) + '\n')
+		res.append(getImage(item))
 	print(res)
 	return res
 
