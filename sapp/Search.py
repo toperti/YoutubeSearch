@@ -57,7 +57,10 @@ def generateURL(item):
 		# make URL for channel
 		URL = "https://www.youtube.com/channel/"
 		URL += item['id']['channelId']
-
+	elif itemType == "Playlist":
+		# make URL for playlist
+		URL = "https://www.youtube.com/playlist?list="
+		URL += item['id']['playlistId']
 	else:
 		URL = "I Don't know how to make a URL for " + itemType + " yet"
 
