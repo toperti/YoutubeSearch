@@ -79,8 +79,8 @@ def genResult(itemList):
 		res.append(getImage(item))
 	return res
 
-def main():
-	searchPhrase = input('What would you like to search for?: ')
+def main(searchPhrase):
+	# searchPhrase = input('What would you like to search for?: ')
 	results = getResponse(searchPhrase)
 	response = genResult(results)
 	return [searchPhrase] + response
