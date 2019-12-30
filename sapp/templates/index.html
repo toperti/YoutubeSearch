@@ -2,14 +2,12 @@
 
 {% block content %}
 	{% for i in range(1, (results|length), 3) %}
-		
-		<div>
-			<p> {{ results[i] }} </p>
-		</div>
-		<div>
-			<a href = {{ results[i+1] }}>
-				<img src = {{ results[i+2] }}>
-			</a>
-		</div>
+			<p> 
+				<a href = {{ results[i+1] }}>
+					<img src = {{ results[i+2] }}>
+				</a> 
+				{{ results[i] }} 
+			</p>
+			<hr>
 	{% endfor %}
 {% endblock %}

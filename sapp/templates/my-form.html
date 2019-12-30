@@ -1,6 +1,16 @@
-<div>Please enter a search phrase to search Youtube</div>
-<br>
-<form action = "{{ url_for('search') }}">
-	<input type name = "search"/>
-	<input type = "submit" value = "Search"/>
-</form>
+<html>
+	<head>
+		<title>Enter Search</title>
+		<link href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap" rel="stylesheet">
+		<link rel = "stylesheet" href = "{{ url_for('static', filename = 'css/main.css') }}">
+	</head>
+	<body>
+		<p>Please enter a search phrase to search Youtube</p>
+		<form action = "{{ url_for('search') }}">
+			<input type name = "search"/>
+			<input type = "submit" value = "Search"/>
+		</form>
+	</body>
+</html>
+
+
